@@ -1,17 +1,25 @@
 {
-  "name": "",
-  "version": "",
-  "description": "",
+  "name": "Carousel",
+  "description": "> Project description",
   "author": "",
-  "license": "",
+  "license": "ISC",
   "engines": {
     "node": ">=6.13.0"
   },
-  "scripts": {
-  },
-  "dependencies": {
-  },
+  "scripts": {},
+  "dependencies": {},
   "devDependencies": {
-    "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor"
-  }
+    "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor.git"
+  },
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jhnlee0526/Carousel.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/jhnlee0526/Carousel/issues"
+  },
+  "homepage": "https://github.com/jhnlee0526/Carousel#readme"
 }
