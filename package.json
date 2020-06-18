@@ -6,10 +6,24 @@
   "engines": {
     "node": ">=6.13.0"
   },
-  "scripts": {},
-  "dependencies": {},
+  "scripts": {
+    "react-dev": "webpack -d --watch",
+    "server-dev": "nodemon server/index.js"
+  },
   "devDependencies": {
-    "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor.git"
+    "babel-core": "^6.23.1",
+    "babel-loader": "^6.3.2",
+    "babel-preset-es2015": "^6.22.0",
+    "babel-preset-react": "^6.23.0",
+    "webpack": "^2.2.1"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "faker": "^4.1.0",
+    "mongoose": "^5.9.19",
+    "nodemon": "^2.0.4",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2"
   },
   "version": "1.0.0",
   "main": "index.js",
