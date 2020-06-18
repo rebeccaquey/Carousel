@@ -1,6 +1,7 @@
 // getting-started.js
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/carousel', {useNewUrlParser: true});
+
+mongoose.connect('mongodb://localhost/carousel', { useNewUrlParser: true });
 
 const db = mongoose.connection;
 
