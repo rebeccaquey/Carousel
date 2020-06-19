@@ -1,3 +1,5 @@
+/* eslint-disable no-else-return */
+/* eslint-disable no-useless-return */
 /* eslint-disable array-callback-return */
 /* eslint-disable no-console */
 const express = require('express');
@@ -14,8 +16,10 @@ app.get('/api/rooms/carousels', (req, res) => {
   Carousels.find((err, data) => {
     if (err) {
       res.status(400).send(err);
+      return;
     } else {
       res.status(200).send(data);
+      return;
     }
   });
 });
@@ -26,8 +30,10 @@ app.get('/api/rooms/:roomId/carousels', (req, res) => {
   Carousels.find({ _id: roomId }, (err, data) => {
     if (err) {
       res.status(400).send(err);
+      return;
     } else {
       res.status(200).send(data);
+      return;
     }
   });
 });
