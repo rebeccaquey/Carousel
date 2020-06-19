@@ -1,9 +1,11 @@
 /* eslint-disable no-plusplus */
 /* eslint-disable spaced-comment */
 /* eslint-disable no-console */
-// const db = require('./index.js');
-
 const faker = require('faker');
+
+const db = require('./index.js');
+
+const Carousel = require('./Carousel.js');
 
 /* generating randomized photo collection */
 const photos = [ // 11 photos
@@ -87,4 +89,11 @@ const getCarousels = (num) => {
 // create 100 carousels
 const carousels = getCarousels(100);
 // show the first one for checking
-console.log(carousels[0]);
+// console.log(carousels[0]);
+
+const insertSampleCarousels = () => {
+  Carousel.create(carousels)
+    .then(() => db.disconnect());
+};
+
+insertSampleCarousels();
