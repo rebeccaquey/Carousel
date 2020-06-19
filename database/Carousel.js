@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 const mongoose = require('mongoose');
 
 const db = require('./index.js');
@@ -5,6 +6,7 @@ const db = require('./index.js');
 mongoose.Promise = global.Promise;
 
 const carouselSchema = new mongoose.Schema({
+  _id: Number,
   title: String,
   description: String,
   isSuperhost: Boolean,

@@ -7,6 +7,50 @@ const db = require('./index.js');
 
 const Carousel = require('./Carousel.js');
 
+/* generating randomized description on each room  */
+const descriptions = [ // 6 descriptions
+  '2 guests · Studio · 1 bed · 1bath',
+  '3 guests · 1 bedroom · 1 bed · 2 shared bath',
+  '1 guests · 1 bedroom · 1 bed · 1 shared bath',
+  '1 guests · Studio · 1 bed · 1bath',
+  '4 guests · Villa · 3 bed · 2bath',
+  '2 guests · 1 bedroom · 1 bed · 1 private bath',
+];
+
+const getRandomDescription = () => {
+  const max = descriptions.length - 1;
+  const min = 0;
+  const randomIndex = Math.floor(Math.random() * (max - min + 1)) + min;
+  return descriptions[randomIndex];
+};
+
+/* generating randomized cost */
+const getRandomCost = () => {
+  const max = 300;
+  const min = 100;
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+};
+
+/* generating randomized rating collection */
+const getRandomRating = () => {
+  const max = 5;
+  const min = 0;
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+};
+
+const getRatings = () => {
+  const ratings = [];
+  const max = 30;
+  const min = 10;
+  const numOfClients = Math.floor(Math.random() * (max - min + 1)) + min;
+
+  for (let i = 0; i < numOfClients; i++) {
+    const randomRating = getRandomRating();
+    ratings.push(randomRating);
+  }
+  return ratings;
+};
+
 /* generating randomized photo collection */
 const photos = [ // 11 photos
   'https://rooms.s3-us-west-1.amazonaws.com/0ab86de4-fa36-40d3-9d6f-c0a773108720.jpg',
@@ -42,41 +86,16 @@ const randomPhotoUrls = () => {
   return urls;
 };
 
-/* generating randomized rating collection */
-const getRandomRating = () => {
-  const max = 5;
-  const min = 0;
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-};
-
-const getRatings = () => {
-  const ratings = [];
-  const max = 30;
-  const min = 10;
-  const numOfClients = Math.floor(Math.random() * (max - min + 1)) + min;
-
-  for (let i = 0; i < numOfClients; i++) {
-    const randomRating = getRandomRating();
-    ratings.push(randomRating);
-  }
-  return ratings;
-};
-
-/* generating randomized cost */
-const getRandomCost = () => {
-  const max = 300;
-  const min = 100;
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-};
-
 /* create fake caroousels to insert into database */
 const getCarousels = (num) => {
   const numOfCarousels = num || 1;
   const carousels = [];
   for (let i = 0; i < numOfCarousels; i++) {
     const carousel = {
+      _id: i,
       title: faker.lorem.sentence(),
-      description: faker.random.words(),
+      // description: faker.random.words(),
+      description: getRandomDescription(),
       isSuperhost: faker.random.boolean(),
       cost: getRandomCost(),
       ratings: getRatings(),
