@@ -1,10 +1,14 @@
+/* eslint-disable no-plusplus */
 /* eslint-disable spaced-comment */
 /* eslint-disable no-console */
-// const db = require('./index.js');
-
 const faker = require('faker');
 
-const photoUrls = [ // 11 photos
+const db = require('./index.js');
+
+const Carousel = require('./Carousel.js');
+
+/* generating randomized photo collection */
+const photos = [ // 11 photos
   'https://rooms.s3-us-west-1.amazonaws.com/0ab86de4-fa36-40d3-9d6f-c0a773108720.jpg',
   'https://rooms.s3-us-west-1.amazonaws.com/215966d4-c983-48d6-80ff-3cc5e9ed364d.jpg',
   'https://rooms.s3-us-west-1.amazonaws.com/226a5d6e-af7c-4780-9138-a41b37a0cadf.jpg',
@@ -19,33 +23,77 @@ const photoUrls = [ // 11 photos
 ];
 
 const getRandomPhotoUrl = () => {
-  const max = photoUrls.length - 1;
+  const max = photos.length - 1;
   const min = 0;
-  //randominze numbers including max and min
   const randomIndex = Math.floor(Math.random() * (max - min + 1)) + min;
-  return photoUrls[randomIndex];
+  return photos[randomIndex];
 };
 
-const randomPhotoUrl = getRandomPhotoUrl();
+const randomPhotoUrls = () => {
+  const urls = [];
+  const max = 7;
+  const min = 4;
+  const numberOfPhotos = Math.floor(Math.random() * (max - min + 1)) + min;
 
-// title
-// description
-// isSuperhost
-// cost
-// ratings - array [rating1, rating2, ]
+  for (let i = 0; i < numberOfPhotos; i++) {
+    const randomPhotoUrl = getRandomPhotoUrl();
+    urls.push(randomPhotoUrl);
+  }
+  return urls;
+};
 
-const firstName = faker.name.firstName();
-const lastName = faker.name.lastName();
+/* generating randomized rating collection */
+const getRandomRating = () => {
+  const max = 5;
+  const min = 0;
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+};
 
-const jobTitle = faker.name.jobTitle();
-const prefix = faker.name.prefix();
-const suffix = faker.name.suffix();
-const jobArea = faker.name.jobArea();
+const getRatings = () => {
+  const ratings = [];
+  const max = 30;
+  const min = 10;
+  const numOfClients = Math.floor(Math.random() * (max - min + 1)) + min;
 
-const phone = faker.phone.phoneNumber();
+  for (let i = 0; i < numOfClients; i++) {
+    const randomRating = getRandomRating();
+    ratings.push(randomRating);
+  }
+  return ratings;
+};
 
-console.log(`random photoUrl: ${randomPhotoUrl}`);
-console.log(`Employee: ${prefix} ${firstName} ${lastName} ${suffix}`);
-console.log(`Job title: ${jobTitle}`);
-console.log(`Job area: ${jobArea}`);
-console.log(`Phone: ${phone}`);
+/* generating randomized cost */
+const getRandomCost = () => {
+  const max = 300;
+  const min = 100;
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+};
+
+/* create fake caroousels to insert into database */
+const getCarousels = (num) => {
+  const numOfCarousels = num || 1;
+  const carousels = [];
+  for (let i = 0; i < numOfCarousels; i++) {
+    const carousel = {
+      title: faker.lorem.sentence(),
+      description: faker.random.words(),
+      isSuperhost: faker.random.boolean(),
+      cost: getRandomCost(),
+      ratings: getRatings(),
+      photos: randomPhotoUrls(),
+    };
+    carousels.push(carousel);
+  }
+  return carousels;
+};
+// create 100 carousels
+const carousels = getCarousels(100);
+// show the first one for checking
+// console.log(carousels[0]);
+
+const insertSampleCarousels = () => {
+  Carousel.create(carousels)
+    .then(() => db.disconnect());
+};
+
+insertSampleCarousels();
