@@ -26,7 +26,7 @@ app.get('/api/rooms/carousels', (req, res) => {
 
 app.get('/api/rooms/:roomId/carousels', (req, res) => {
   const roomId = req.params.roomId || '';
-  // console.log('req.params.roomId: ', roomId);
+  // console.log('req.params.roomId : ', roomId);
   Carousels.find({ _id: roomId }, (err, data) => {
     if (err) {
       res.status(400).send(err);
