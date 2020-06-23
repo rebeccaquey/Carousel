@@ -5,13 +5,57 @@
 /* eslint-disable no-console */
 import React from 'react';
 import styled from 'styled-components';
-import PhotoList from './PhotoList.jsx';
+import Photos from './Photos.jsx';
 
 const CurrentRoomPhoto = styled.li`
   outline: 2px solid lime;
   width: 265px;
   height: 260px;
   padding: 0;
+`;
+
+const Header = styled.div`
+  display: grid;
+  grid-template-columns: auto auto auto;
+  font-size: 12px;
+  padding-top: 10px;
+
+  .superHost {
+    position: relative;
+    bottom: 2px;
+    width: 85px;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 600;
+    border: 1px solid black;
+    border-radius: 4px;
+    padding: 1px;
+  }
+
+  .description{
+    color: rgb(113, 113, 113);
+  }
+
+  .rating img {
+    position: relative;
+    top: 2px;
+    width: 13px;
+    padding: 0;
+    margin: 0 2px 0 0;
+  }
+
+  .rating span {
+    color: rgb(113, 113, 113);
+  }
+`;
+
+const Title = styled.div`
+  font-size: 14px;
+  margin: 4px 0;
+`;
+
+const Price = styled.div`
+  font-size: 12px;
 `;
 
 // console.log('hello Carousel');
@@ -24,20 +68,26 @@ class Carousel extends React.Component {
   }
 
   render() {
-    console.log(this.props.info);
+    // console.log(this.props.info);
     return (
       <CurrentRoomPhoto>
-        <PhotoList collections={this.props.info.photos} />
-        <div>
-          <span> SUPERHOST </span>
-          <span> Private room , 1 bed </span>
-          <span> 4.64 (106) </span>
-        </div>
-        <div> Luxury, 2B2B Apt in the hear of ... </div>
-        <div>
-          <bold> $107 </bold>
+        <Photos collections={this.props.info.photos} />
+
+        {/* TODO: ARROWS - left, right  */}
+        <Header>
+          <span className="superHost"> superhost </span>
+          <span className="description"> Private room ... </span>
+          <span className="rating">
+            <img src="./ratingStar.png" alt="rating" />
+            4.64
+            <span> (106) </span>
+          </span>
+        </Header>
+        <Title> Luxury, 2B2B Apt in the hear of ... </Title>
+        <Price>
+          <b> $107 </b>
           &#47; night
-        </div>
+        </Price>
       </CurrentRoomPhoto>
     );
   }

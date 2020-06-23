@@ -68,6 +68,8 @@ class CarouselApp extends React.Component {
       carousels: [],
     };
     this.getCarousels = this.getCarousels.bind(this);
+    this.getPrev = this.getPrev.bind(this);
+    this.getNext = this.getNext.bind(this);
   }
 
   componentDidMount() {
@@ -89,9 +91,17 @@ class CarouselApp extends React.Component {
     });
   }
 
+  getPrev() {
+    console.log('prev click!');
+  }
+
+  getNext() {
+    console.log('next click!');
+  }
+
   render() {
-    $('.prev').on('click', () => { console.log('prev click!'); });
-    $('.next').on('click', () => { console.log('next click!'); });
+    $('.prev').on('click', this.getPrev);
+    $('.next').on('click', this.getNext);
 
     return (
       <Container>
