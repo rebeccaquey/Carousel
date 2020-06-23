@@ -14,7 +14,7 @@ const Frame = styled.ul`
   margin: 0 auto;
   height: 260px;
   list-style: none;
-  background-color: pink;
+  outline: 3px solid red;
 `;
 
 const CarouselList = ({ carousels }) => (

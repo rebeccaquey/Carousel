@@ -8,7 +8,7 @@ import styled from 'styled-components';
 import Photos from './Photos.jsx';
 
 const CurrentRoomPhoto = styled.li`
-  outline: 2px solid lime;
+  outline: 2px solid #ccc;
   width: 265px;
   height: 260px;
   padding: 0;
