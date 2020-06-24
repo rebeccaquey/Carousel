@@ -7,7 +7,7 @@ const express = require('express');
 const Carousels = require('../database/Carousel.js');
 
 const app = express();
-const port = 3000;
+const port = 3007;
 
 // app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static('client/dist'));
@@ -21,7 +21,8 @@ app.get('/api/rooms/carousels', (req, res) => {
       res.status(200).send(data);
       return;
     }
-  });
+  }).sort({ _id: -1 }).limit(20);
+  /* TODO: make it randomly picked */
 });
 
 app.get('/api/rooms/:roomId/carousels', (req, res) => {
@@ -35,7 +36,7 @@ app.get('/api/rooms/:roomId/carousels', (req, res) => {
       res.status(200).send(data);
       return;
     }
-  });
+  }).sort({ _id: -1 });
 });
 
 app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`));
