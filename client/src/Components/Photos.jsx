@@ -7,12 +7,11 @@ import React from 'react';
 import $ from 'jquery';
 import styled from 'styled-components';
 
-const PhotoFrame = styled.ul`
+const PhotoFrame = styled.div`
   height: 180px;
   width: 100%;
   margin: 0;
   padding: 0;
-  list-style: none;
   img {
     width: 265px;
     height: 180px;
@@ -69,8 +68,8 @@ class Photos extends React.Component {
   }
 
   render() {
-    $('.prev').on('click', this.props.getPrev);
-    $('.next').on('click', this.props.getNext);
+    $('.prev').on('click', this.getPrev);
+    $('.next').on('click', this.getNext);
 
     return (
       <PhotoFrame>
