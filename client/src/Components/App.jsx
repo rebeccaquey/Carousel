@@ -61,7 +61,7 @@ const Arrows = styled.span`
   };
 `;
 
-class CarouselApp extends React.Component {
+class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -121,4 +121,4 @@ class CarouselApp extends React.Component {
   }
 }
 
-export default CarouselApp;
+export default App;

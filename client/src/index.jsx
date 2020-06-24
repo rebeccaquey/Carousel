@@ -1,6 +1,6 @@
 /* eslint-disable import/extensions */
 import React from 'react';
 import ReactDOM from 'react-dom';
-import CarouselApp from './Components/CarouselApp.jsx';
+import App from './Components/App.jsx';
 
-ReactDOM.render(<CarouselApp />, document.getElementById('carouselApp'));
+ReactDOM.render(<App />, document.getElementById('carouselApp'));
