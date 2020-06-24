@@ -68,7 +68,6 @@ class Carousel extends React.Component {
   }
 
   render() {
-    // console.log(this.props.info);
     return (
       <CurrentRoomPhoto>
         <Photos collections={this.props.info.photos} />

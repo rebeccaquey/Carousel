@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable class-methods-use-this */
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/prop-types */
@@ -39,7 +41,7 @@ const Arrows = styled.span`
     background-color: #ffffff5e;
     color: #777;
   };
-  .btn.next {
+  .btn.nextPhoto {
     right: 0;
   };
   .btn:hover {
@@ -53,7 +55,8 @@ class Photos extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      urls: this.props.collections,
+      photo: this.props.collections[0],
+
     };
     this.getPrev = this.getPrev.bind(this);
     this.getNext = this.getNext.bind(this);
@@ -68,17 +71,13 @@ class Photos extends React.Component {
   }
 
   render() {
-    $('.prev').on('click', this.getPrev);
-    $('.next').on('click', this.getNext);
-
     return (
       <PhotoFrame>
-        <img src={this.state.urls[0]} alt="images of room" />
+        <img src={this.state.photo} alt="images of room" />
 
-        {/* TODO: Arrows are not working */}
         <Arrows>
-          <span className="btn prev"> &lt; </span>
-          <span className="btn next"> &gt; </span>
+          <span className="btn prevPhoto" onClick={this.getPrev}> &lt; </span>
+          <span className="btn nextPhoto" onClick={this.getNext}> &gt; </span>
         </Arrows>
       </PhotoFrame>
     );

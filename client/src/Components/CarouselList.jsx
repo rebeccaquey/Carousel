@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable react/prop-types */
 /* eslint-disable import/extensions */
 /* eslint-disable no-console */
@@ -108,7 +110,8 @@ class CarouselList extends React.Component {
   }
 
   render() {
-    const { pageIndex } = this.state;
+    const { carousels } = this.props;
+    const { pageIndex, right } = this.state;
 
     return (
       <div>
@@ -127,9 +130,9 @@ class CarouselList extends React.Component {
           </Pagination>
         </Header>
         <Frame>
-          <ul style={{ right: this.state.right }}>
+          <ul style={{ right }}>
             {
-              this.props.carousels.map((carousel) => (
+              carousels.map((carousel) => (
                 <Carousel info={carousel} />
               ))
             }
