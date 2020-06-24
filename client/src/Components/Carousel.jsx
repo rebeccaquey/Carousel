@@ -8,10 +8,10 @@ import styled from 'styled-components';
 import Photos from './Photos.jsx';
 
 const CurrentRoomPhoto = styled.li`
-  outline: 2px solid #ccc;
   width: 265px;
   height: 260px;
   padding: 0;
+  margin-right: 20px;
 `;
 
 const Header = styled.div`
@@ -68,7 +68,6 @@ class Carousel extends React.Component {
   }
 
   render() {
-    // console.log(this.props.info);
     return (
       <CurrentRoomPhoto>
         <Photos collections={this.props.info.photos} />
