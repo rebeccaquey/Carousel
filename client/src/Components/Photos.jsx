@@ -14,9 +14,11 @@ const PhotoFrame = styled.div`
   width: 100%;
   margin: 0;
   padding: 0;
+
   img {
     width: 265px;
     height: 180px;
+    border-radius: 5px;
   }
 `;
 
@@ -30,6 +32,7 @@ const Arrows = styled.span`
   .btn {
     position: absolute;
     top: 50%;
+    transform: translateY(-50%);
     display: inline-block;
     width: 25px;
     height: 25px;
@@ -55,29 +58,64 @@ class Photos extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      photo: this.props.collections[0],
-
+      urls: this.props.collections,
+      photoIndex: 0,
     };
     this.getPrev = this.getPrev.bind(this);
     this.getNext = this.getNext.bind(this);
   }
 
-  getPrev() {
-    console.log('prev click!');
+  getPrev(e) {
+    let { photoIndex } = this.state;
+
+    if (photoIndex <= 0) {
+      e.preventDefault();
+    } else {
+      photoIndex -= 1;
+    }
+
+    this.setState({
+      photoIndex,
+    });
   }
 
-  getNext() {
-    console.log('next click!');
+  getNext(e) {
+    const { urls } = this.state;
+    let { photoIndex } = this.state;
+
+    if (photoIndex >= urls.length - 1) {
+      e.preventDefault();
+    } else {
+      photoIndex += 1;
+    }
+
+    this.setState({
+      photoIndex,
+    });
   }
 
   render() {
-    return (
-      <PhotoFrame>
-        <img src={this.state.photo} alt="images of room" />
+    let buttons;
+    const { photoIndex, urls } = this.state;
 
-        <Arrows>
+    if (photoIndex === 0) {
+      buttons = <span className="btn nextPhoto" onClick={this.getNext}> &gt; </span>;
+    } else if (photoIndex === urls.length - 1) {
+      buttons = <span className="btn prevPhoto" onClick={this.getPrev}> &lt; </span>;
+    } else {
+      buttons = (
+        <div>
           <span className="btn prevPhoto" onClick={this.getPrev}> &lt; </span>
           <span className="btn nextPhoto" onClick={this.getNext}> &gt; </span>
+        </div>
+      );
+    }
+
+    return (
+      <PhotoFrame>
+        <img src={this.state.urls[this.state.photoIndex]} alt="images of room" />
+        <Arrows>
+          {buttons}
         </Arrows>
       </PhotoFrame>
     );

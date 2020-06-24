@@ -73,7 +73,7 @@ class CarouselList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      pageIndex: 1,
+      pageNum: 1,
       right: 0,
     };
 
@@ -82,36 +82,36 @@ class CarouselList extends React.Component {
   }
 
   getPrev(e) {
-    let { pageIndex, right } = this.state;
-    if (pageIndex <= 1) {
+    let { pageNum, right } = this.state;
+    if (pageNum <= 1) {
       e.preventDefault();
     } else {
-      pageIndex -= 1;
+      pageNum -= 1;
       right -= 1140;
     }
     this.setState({
-      pageIndex,
+      pageNum,
       right,
     });
   }
 
   getNext(e) {
-    let { pageIndex, right } = this.state;
-    if (pageIndex >= 4) {
+    let { pageNum, right } = this.state;
+    if (pageNum >= 4) {
       e.preventDefault();
     } else {
-      pageIndex += 1;
+      pageNum += 1;
       right += 1140;
     }
     this.setState({
-      pageIndex,
+      pageNum,
       right,
     });
   }
 
   render() {
     const { carousels } = this.props;
-    const { pageIndex, right } = this.state;
+    const { pageNum, right } = this.state;
 
     return (
       <div>
@@ -119,7 +119,7 @@ class CarouselList extends React.Component {
           <Title> More places to stay </Title>
           <Pagination>
             <Pages>
-              {pageIndex}
+              {pageNum}
               {' '}
               / 4
             </Pages>
