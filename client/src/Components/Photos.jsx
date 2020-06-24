@@ -1,12 +1,8 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable class-methods-use-this */
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/prop-types */
-/* eslint-disable import/extensions */
-/* eslint-disable no-console */
 import React from 'react';
-import $ from 'jquery';
 import styled from 'styled-components';
 
 const PhotoFrame = styled.div`
@@ -113,7 +109,7 @@ class Photos extends React.Component {
 
     return (
       <PhotoFrame>
-        <img src={this.state.urls[this.state.photoIndex]} alt="images of room" />
+        <img src={urls[photoIndex]} alt="images of room" />
         <Arrows>
           {buttons}
         </Arrows>
