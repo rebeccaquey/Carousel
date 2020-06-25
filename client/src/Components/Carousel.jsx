@@ -71,8 +71,6 @@ class Carousel extends React.Component {
     return (
       <CurrentRoomPhoto>
         <Photos collections={this.props.info.photos} />
-
-        {/* TODO: ARROWS - left, right  */}
         <Header>
           <span className="superHost"> superhost </span>
           <span className="description"> Private room ... </span>
