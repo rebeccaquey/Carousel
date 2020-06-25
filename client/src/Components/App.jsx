@@ -45,6 +45,7 @@ class App extends React.Component {
     return (
       <Container>
         <CarouselList carousels={carousels} />
+        {/* {carousels.length ? <CarouselList carousels={carousels} /> : null} */}
       </Container>
     );
   }

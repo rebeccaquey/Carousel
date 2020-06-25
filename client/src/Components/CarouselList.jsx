@@ -112,7 +112,15 @@ class CarouselList extends React.Component {
   render() {
     const { carousels } = this.props;
     const { pageNum, right } = this.state;
-
+    // const photos = (
+    //   <ul style={{ right }}>
+    //     {
+    //       carousels.map((carousel) => (
+    //         <Carousel info={carousel} />
+    //       ))
+    //     }
+    //   </ul>
+    // );
     return (
       <div>
         <Header>
@@ -130,6 +138,7 @@ class CarouselList extends React.Component {
           </Pagination>
         </Header>
         <Frame>
+          {/* {carousels.length ? photos : null} */}
           <ul style={{ right }}>
             {
               carousels.map((carousel) => (
