@@ -10,6 +10,10 @@ const Container = styled.div`
   background-color: #f7f7f7;
   font-family: 'Montserrat', sans-serif;
   color: rgb(34, 34, 34);
+
+  @media (max-width: 950px) {
+    display: none;
+  }
 `;
 
 class App extends React.Component {
@@ -45,7 +49,6 @@ class App extends React.Component {
     return (
       <Container>
         <CarouselList carousels={carousels} />
-        {/* {carousels.length ? <CarouselList carousels={carousels} /> : null} */}
       </Container>
     );
   }

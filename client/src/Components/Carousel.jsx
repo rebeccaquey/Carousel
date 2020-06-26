@@ -12,6 +12,11 @@ const CurrentRoomPhoto = styled.li`
   height: 260px;
   padding: 0;
   margin-right: 20px;
+
+  @media (max-width: 1120px) {
+    width: 300px;
+    margin-right: 25px;
+  }
 `;
 
 const Header = styled.div`
