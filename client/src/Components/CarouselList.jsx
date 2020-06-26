@@ -4,19 +4,27 @@
 /* eslint-disable import/extensions */
 /* eslint-disable no-console */
 import React from 'react';
+import $ from 'jquery';
 import styled from 'styled-components';
 import Carousel from './Carousel.jsx';
 
-const Frame = styled.div`
+const DipslayBox = styled.div`
   max-width: 1120px;
-  padding: 0;
   margin: 0 auto;
-  height: 260px;
   overflow: hidden;
+
+  @media (max-width: 1120px) {
+    max-width: 950px;
+  }
+`;
+
+const Frame = styled.div`
+  padding: 0;
+  height: 260px;
 
   ul {
     position: relative;
-    display: flex;
+    display: inline-flex;
     margin: 0;
     padding: 0;
     list-style: none;
@@ -24,8 +32,6 @@ const Frame = styled.div`
 `;
 
 const Header = styled.div`
-  max-width: 1120px;
-  margin: 0 auto;
   padding: 0 0 24px;
   overflow: hidden;
 `;
@@ -82,12 +88,20 @@ class CarouselList extends React.Component {
   }
 
   getPrev(e) {
+    let subtractedNum;
     let { pageNum, right } = this.state;
+
+    if ($(window).width() >= 1120) {
+      subtractedNum = 1140;
+    } else if ($(window).width() < 1120) {
+      subtractedNum = 975;
+    }
+
     if (pageNum <= 1) {
       e.preventDefault();
     } else {
       pageNum -= 1;
-      right -= 1140;
+      right -= subtractedNum;
     }
     this.setState({
       pageNum,
@@ -95,14 +109,26 @@ class CarouselList extends React.Component {
     });
   }
 
-  getNext(e) {
+  getNext() {
+    let addedNum;
     let { pageNum, right } = this.state;
-    if (pageNum >= 4) {
-      e.preventDefault();
+    const { carousels } = this.props;
+    const maxPageNum = Math.ceil(carousels.length / 4);
+
+    if ($(window).width() >= 1120) {
+      addedNum = 1140;
+    } else if ($(window).width() < 1120) {
+      addedNum = 975;
+    }
+
+    if (pageNum >= maxPageNum) {
+      pageNum = 1;
+      right = 0;
     } else {
       pageNum += 1;
-      right += 1140;
+      right += addedNum;
     }
+
     this.setState({
       pageNum,
       right,
@@ -110,26 +136,23 @@ class CarouselList extends React.Component {
   }
 
   render() {
-    const { carousels } = this.props;
     const { pageNum, right } = this.state;
-    // const photos = (
-    //   <ul style={{ right }}>
-    //     {
-    //       carousels.map((carousel) => (
-    //         <Carousel info={carousel} />
-    //       ))
-    //     }
-    //   </ul>
-    // );
+    const { carousels } = this.props;
+    const maxPageNum = Math.ceil(carousels.length / 4);
+
+    $('ul').animate({ right }, 900);
+
     return (
-      <div>
+      <DipslayBox>
         <Header>
           <Title> More places to stay </Title>
           <Pagination>
             <Pages>
               {pageNum}
               {' '}
-              / 4
+              /
+              {' '}
+              {maxPageNum}
             </Pages>
             <Arrows>
               <span className="btn prev" onClick={this.getPrev}> &lt; </span>
@@ -138,7 +161,6 @@ class CarouselList extends React.Component {
           </Pagination>
         </Header>
         <Frame>
-          {/* {carousels.length ? photos : null} */}
           <ul style={{ right }}>
             {
               carousels.map((carousel) => (
@@ -147,7 +169,7 @@ class CarouselList extends React.Component {
             }
           </ul>
         </Frame>
-      </div>
+      </DipslayBox>
     );
   }
 }
