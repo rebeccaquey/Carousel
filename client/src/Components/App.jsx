@@ -24,6 +24,7 @@ class App extends React.Component {
       carousels: [],
     };
     this.getCarousels = this.getCarousels.bind(this);
+    this.getSpecificCarousel = this.getSpecificCarousel.bind(this);
     this.showFavModal = this.showFavModal.bind(this);
   }
 
@@ -31,10 +32,27 @@ class App extends React.Component {
     this.getCarousels();
   }
 
+  // get all the room for carousel
   getCarousels() {
     $.ajax({
       method: 'GET',
       url: '/api/rooms/carousels',
+      success: (carousels) => {
+        this.setState({
+          carousels,
+        });
+      },
+      error: (err) => {
+        console.log('error: ', err);
+      },
+    });
+  }
+
+  // get a specific room
+  getSpecificCarousel(roomId) {
+    $.ajax({
+      method: 'GET',
+      url: `/api/rooms/${roomId}/carousels`,
       success: (carousels) => {
         this.setState({
           carousels,

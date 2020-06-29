@@ -17,18 +17,8 @@ app.get('/api/rooms/carousels', (req, res) => {
   controller.getCarousels(req, res);
 });
 
-// app.get('/api/rooms/:roomId/carousels', (req, res) => {
-//   const roomId = req.params.roomId || '';
-//   // console.log('req.params.roomId : ', roomId);
-//   Carousels.find({ _id: roomId }, (err, data) => {
-//     if (err) {
-//       res.status(400).send(err);
-//       return;
-//     } else {
-//       res.status(200).send(data);
-//       return;
-//     }
-//   }).sort({ _id: -1 });
-// });
+app.get('/api/rooms/:roomId/carousels', (req, res) => {
+  controller.getSpecificCarousel(req, res);
+});
 
 app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`));
