@@ -10,6 +10,18 @@ const getCarousels = (req, res) => {
   });
 };
 
+const getSpecificCarousel = (req, res) => {
+  const roomId = req.params.roomId || '';
+  model.getCarousels(roomId, (err, data) => {
+    if (err) {
+      res.status(400).send(err);
+    } else {
+      res.status(200).send(data);
+    }
+  });
+};
+
 module.exports = {
   getCarousels,
+  getSpecificCarousel,
 };
