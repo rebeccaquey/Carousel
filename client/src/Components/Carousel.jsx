@@ -21,7 +21,6 @@ const CurrentRoomPhoto = styled.li`
 
 const Header = styled.div`
   display: grid;
-  grid-template-columns: auto auto auto;
   font-size: 12px;
   padding-top: 10px;
 
@@ -39,6 +38,14 @@ const Header = styled.div`
 
   .description{
     color: rgb(113, 113, 113);
+    text-overflow: ellipsis;
+    padding: 0 5px;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  .rating {
+    text-align: right;
   }
 
   .rating img {
@@ -55,12 +62,15 @@ const Header = styled.div`
 `;
 
 const Title = styled.div`
-  font-size: 14px;
+  font-size: 16px;
   margin: 4px 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 `;
 
 const Price = styled.div`
-  font-size: 12px;
+  font-size: 16px;
 `;
 
 // console.log('hello Carousel');
@@ -68,26 +78,67 @@ class Carousel extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      photos: [],
+      carousel: this.props.info,
     };
   }
 
   render() {
+    let label;
+    let columns;
+
+    const {
+      photos, title, description, isSuperhost, cost, ratings,
+    } = this.state.carousel;
+
+    let sum = 0;
+    for (let i = 0; i < ratings.length; i += 1) {
+      sum += ratings[i];
+    }
+    const avgRatings = Math.ceil((sum / ratings.length) * 100) / 100;
+
+    if (isSuperhost) {
+      label = <span className="superHost"> superhost </span>;
+      columns = 'auto auto auto';
+    } else {
+      label = '';
+      columns = 'auto auto';
+    }
+
     return (
       <CurrentRoomPhoto>
-        <Photos collections={this.props.info.photos} />
-        <Header>
-          <span className="superHost"> superhost </span>
-          <span className="description"> Private room ... </span>
+        <Photos collections={photos} showModal={this.props.showModal} />
+        <Header className="header" style={{ gridTemplateColumns: columns }}>
+          { label }
+          {/* Todo: hiding some of the text at the end */}
+          <span className="description">
+            {' '}
+            {description}
+            {' '}
+          </span>
           <span className="rating">
             <img src="./ratingStar.png" alt="rating" />
-            4.64
-            <span> (106) </span>
+            {avgRatings}
+            <span>
+              {' '}
+              (
+              {ratings.length}
+              )
+              {' '}
+            </span>
           </span>
         </Header>
-        <Title> Luxury, 2B2B Apt in the hear of ... </Title>
+        {/* Todo: hiding some of the text at the end */}
+        <Title>
+          {' '}
+          {title}
+          {' '}
+        </Title>
         <Price>
-          <b> $107 </b>
+          <b>
+            {' '}
+            $
+            {cost}
+          </b>
           &#47; night
         </Price>
       </CurrentRoomPhoto>
