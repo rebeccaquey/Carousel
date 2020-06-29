@@ -81,10 +81,23 @@ class CarouselList extends React.Component {
     this.state = {
       pageNum: 1,
       right: 0,
+      maxPageNum: '',
     };
-
+    this.componentDidMount = this.componentDidMount.bind(this);
     this.getPrev = this.getPrev.bind(this);
     this.getNext = this.getNext.bind(this);
+  }
+
+  componentDidMount() {
+    if ($(window).width() >= 1120) {
+      this.setState({
+        maxPageNum: 5,
+      });
+    } else {
+      this.setState({
+        maxPageNum: 7,
+      });
+    }
   }
 
   getPrev(e) {
@@ -93,7 +106,7 @@ class CarouselList extends React.Component {
 
     if ($(window).width() >= 1120) {
       subtractedNum = 1140;
-    } else if ($(window).width() < 1120) {
+    } else {
       subtractedNum = 975;
     }
 
@@ -111,13 +124,15 @@ class CarouselList extends React.Component {
 
   getNext() {
     let addedNum;
+    let maxPageNum;
     let { pageNum, right } = this.state;
     const { carousels } = this.props;
-    const maxPageNum = Math.ceil(carousels.length / 4);
 
     if ($(window).width() >= 1120) {
       addedNum = 1140;
-    } else if ($(window).width() < 1120) {
+      maxPageNum = Math.ceil(carousels.length / 4);
+    } else {
+      maxPageNum = Math.ceil(carousels.length / 3);
       addedNum = 975;
     }
 
@@ -132,13 +147,13 @@ class CarouselList extends React.Component {
     this.setState({
       pageNum,
       right,
+      maxPageNum,
     });
   }
 
   render() {
-    const { pageNum, right } = this.state;
-    const { carousels } = this.props;
-    const maxPageNum = Math.ceil(carousels.length / 4);
+    const { pageNum, right, maxPageNum } = this.state;
+    const { carousels, showModal } = this.props;
 
     $('ul').animate({ right }, 900);
 
@@ -164,7 +179,7 @@ class CarouselList extends React.Component {
           <ul style={{ right }}>
             {
               carousels.map((carousel) => (
-                <Carousel info={carousel} />
+                <Carousel info={carousel} showModal={showModal} />
               ))
             }
           </ul>

@@ -37,6 +37,14 @@ const Arrows = styled.span`
     text-align: right;
   }
 
+  .fav:hover {
+    cursor: pointer;
+
+    .favImg {
+      display: inline-block;
+    }
+  }
+
   .favImg {
     width: 35px;
     height: 35px;
@@ -49,21 +57,16 @@ const Arrows = styled.span`
       animation-name: fadeIn;
       animation-duration: 1s;
       animation-timing-function: ease-out;
+      animation-fill-mode: forwards;
     }
 
     @keyframes fadeIn {
-      from {opacity: 0.3}
-      to {opacity: 1}
+      0% {opacity: 0.3}
+      100% {opacity: 1.0}
     }
   }
 
-  .fav:hover {
-    cursor: pointer;
 
-    .favImg {
-      display: inline-block;
-    }
-  }
 
   .btn {
     position: absolute;
@@ -135,6 +138,7 @@ class Photos extends React.Component {
   }
 
   favCheck() {
+    this.props.showModal();
     const { isFav } = this.state;
     if (isFav) {
       this.setState({
