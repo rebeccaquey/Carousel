@@ -112,7 +112,8 @@ const carousels = getCarousels(100);
 
 const insertSampleCarousels = () => {
   Carousel.create(carousels)
-    .then(() => db.disconnect());
+    .then(() => db.disconnect())
+    .catch((err) => { console.log(err); });
 };
 
 insertSampleCarousels();
