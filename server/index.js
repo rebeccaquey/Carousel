@@ -5,12 +5,14 @@
 const express = require('express');
 // const bodyParser = require('body-parser');
 // const Carousels = require('../database/Carousel.js');
+const cors = require('cors');
 const controller = require('./controllers.js');
 
 const app = express();
 const port = 3007;
 
 // app.use(bodyParser.urlencoded({extended: false}));
+app.use(cors());
 app.use(express.static('client/dist'));
 
 app.get('/api/rooms/carousels', (req, res) => {
