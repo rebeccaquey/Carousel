@@ -36,7 +36,7 @@ class App extends React.Component {
   getCarousels() {
     $.ajax({
       method: 'GET',
-      url: '/api/rooms/carousels',
+      url: 'http://localhost:3007/api/rooms/carousels',
       success: (carousels) => {
         this.setState({
           carousels,
@@ -52,7 +52,7 @@ class App extends React.Component {
   getSpecificCarousel(roomId) {
     $.ajax({
       method: 'GET',
-      url: `/api/rooms/${roomId}/carousels`,
+      url: `http://localhost:3007/api/rooms/${roomId}/carousels`,
       success: (carousels) => {
         this.setState({
           carousels,
@@ -68,7 +68,7 @@ class App extends React.Component {
     $('body').append(`
       <div class="cover" style="position: absolute; top: 0; width: 100%; height: 100%; background-color: #00000096;"></div>
       <div class="favModal">
-        <img class="closeFavModal" src="./close.png" height="16" width="16" style="cursor: pointer;"/>
+        <img class="closeFavModal" src="https://rooms.s3-us-west-1.amazonaws.com/close.png" height="16" width="16" style="cursor: pointer;"/>
         <h3 style="font-size: 24px">Save to a list</h3>
         <span class="createFav" style="display: inline-block; width: 100%; margin: 14px 0; color: #008489; cursor: pointer"> Create to new list </span>
         <span class="favFormBox" style="width: 100%; margin: 14px 0 30px; display: none;"></span>

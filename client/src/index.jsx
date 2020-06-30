@@ -3,4 +3,4 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './Components/App.jsx';
 
-ReactDOM.render(<App />, document.getElementById('carouselApp'));
+ReactDOM.render(<App />, document.getElementById('carousel'));
