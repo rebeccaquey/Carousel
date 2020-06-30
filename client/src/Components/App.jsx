@@ -65,8 +65,8 @@ class App extends React.Component {
   }
 
   showFavModal() {
-    $('body').append(`
-      <div class="cover" style="position: absolute; top: 0; width: 100%; height: 100%; background-color: #00000096;"></div>
+    $('body').css('overflow', 'hidden').append(`
+      <div class="cover" style="position: fixed; top: 0; width: 100%; height: 100%; background-color: #00000096;"></div>
       <div class="favModal">
         <img class="closeFavModal" src="https://rooms.s3-us-west-1.amazonaws.com/close.png" height="16" width="16" style="cursor: pointer;"/>
         <h3 style="font-size: 24px">Save to a list</h3>
@@ -74,19 +74,21 @@ class App extends React.Component {
         <span class="favFormBox" style="width: 100%; margin: 14px 0 30px; display: none;"></span>
         <ul class="faveCollection" style="list-style: none; padding: 0; width: 100%"></ul>
       </div>
-    `).find('.favModal').css({
-      'background-color': 'white',
-      width: '500px',
-      'min-height': '300px',
-      position: 'absolute',
-      top: '50%',
-      left: '50%',
-      transform: 'translate(-50%, -50%)',
-      padding: '32px 32px 100px',
-      'box-sizing': 'border-box',
-    });
+    `).find('.favModal')
+      .css({
+        'background-color': 'white',
+        width: '500px',
+        'min-height': '300px',
+        position: 'fixed',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        padding: '32px 32px 100px',
+        'box-sizing': 'border-box',
+      });
 
     $('.closeFavModal').on('click', () => {
+      $('body').css('overflow', 'scroll');
       $('.cover').remove();
       $('.favModal').remove();
     });
@@ -97,7 +99,7 @@ class App extends React.Component {
           <label for="favName" style="margin-bottom: 10px; display: inline-block">Name:</label><br>
           <input id="favName" type="text" onChange="" style="width: 100%; padding: 10px 3px;
           border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box;"><br>
-          <span style="position: relative; top: 20px; left: 258px;">
+          <span style="position: relative; top: 20px; left: 245px;">
             <span class="cancelButton" style="background-color: #fff; padding: 9px 19px; border: 1px solid #008489; margin-right: 15px; border-radius: 5px; cursor: pointer;">cancel</span>
             <span class="createButton" style="background-color: rgba(0, 132, 137); color: white; padding: 10px 20px; border-radius: 5px; cursor: pointer;">create</span>
           </span>
@@ -129,14 +131,14 @@ class App extends React.Component {
         }
 
         $('.faveCollection').append(`
-          <li style="overflow: hidden; padding: 26px 0; border-top: 1px solid #eee;"><span style="float: left; position: relative; top: 5px;">${favName}</span><img class="favButton" style="float: right; cursor: pointer" src="./fav.png" height="30" width="30"/></li>
+          <li style="overflow: hidden; padding: 26px 0; border-top: 1px solid #eee;"><span style="float: left; position: relative; top: 5px;">${favName}</span><img class="favButton" style="float: right; cursor: pointer" src="https://rooms.s3-us-west-1.amazonaws.com/fav.png" height="30" width="30"/></li>
         `);
 
         $('.favButton').on('click', () => {
-          if ($('.favButton').attr('src') === './fav.png') {
-            $('.favButton').attr('src', './fav_over.png');
+          if ($('.favButton').attr('src') === 'https://rooms.s3-us-west-1.amazonaws.com/fav.png') {
+            $('.favButton').attr('src', 'https://rooms.s3-us-west-1.amazonaws.com/fav_over.png');
           } else {
-            $('.favButton').attr('src', './fav.png');
+            $('.favButton').attr('src', 'https://rooms.s3-us-west-1.amazonaws.com/fav.png');
           }
         });
       });
@@ -147,9 +149,11 @@ class App extends React.Component {
     const { carousels } = this.state;
 
     return (
-      <Container>
-        <CarouselList carousels={carousels} showModal={this.showFavModal} />
-      </Container>
+      <div>
+        <Container>
+          <CarouselList carousels={carousels} showModal={this.showFavModal} />
+        </Container>
+      </div>
     );
   }
 }
