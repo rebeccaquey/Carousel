@@ -36,7 +36,7 @@ class App extends React.Component {
   getCarousels() {
     $.ajax({
       method: 'GET',
-      url: 'http://localhost:3007/api/rooms/carousels',
+      url: 'http://localhost:3007/carousel',
       success: (carousels) => {
         this.setState({
           carousels,
@@ -52,7 +52,7 @@ class App extends React.Component {
   getSpecificCarousel(roomId) {
     $.ajax({
       method: 'GET',
-      url: `http://localhost:3007/api/rooms/${roomId}/carousels`,
+      url: `http://localhost:3007/carousel/${roomId}`,
       success: (carousels) => {
         this.setState({
           carousels,

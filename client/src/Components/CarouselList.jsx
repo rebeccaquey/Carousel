@@ -154,7 +154,6 @@ class CarouselList extends React.Component {
   render() {
     const { pageNum, right, maxPageNum } = this.state;
     const { carousels, showModal } = this.props;
-
     $('ul').animate({ right }, 900);
 
     return (
@@ -178,8 +177,8 @@ class CarouselList extends React.Component {
         <Frame>
           <ul style={{ right }}>
             {
-              carousels.map((carousel) => (
-                <Carousel info={carousel} showModal={showModal} />
+              carousels.map((carousel, index) => (
+                <Carousel key={index} info={carousel} showModal={showModal} />
               ))
             }
           </ul>
